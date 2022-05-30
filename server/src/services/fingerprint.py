@@ -3,8 +3,6 @@ import cv2
 import numpy
 import uuid
 import os
-
-from pathlib import Path
 from os import listdir
 from os.path import isfile, join
 
@@ -98,7 +96,7 @@ def check_if_fingerprint_match(des1, des2) -> bool:
 
 def compare_with_user(username: str, uploaded_filepath: str) -> bool:
     # TODO handle if username exist
-    base_dir = f"/app/resources/users/{username}"
+    base_dir = f"/database/{username}"
     users_file = [f"{base_dir}/{file}" for file in listdir(base_dir) if isfile(join(base_dir, file))]
     des_uploaded_file = calculate_descriptions(uploaded_filepath)
     for user_file in users_file:
@@ -110,9 +108,7 @@ def compare_with_user(username: str, uploaded_filepath: str) -> bool:
 
 async def save_file(upload_file: UploadFile, base_directory: Optional[str] = "temp") -> str:
     file_extension = upload_file.filename.split('.')[-1]
-    base_dir = f"resources/{base_directory}/"
-    Path(base_dir).mkdir(parents=True, exist_ok=True)
-    out_file_path = f"{base_dir}/{uuid.uuid4()}.{file_extension}"
+    out_file_path = f"/database/{base_directory}/{uuid.uuid4()}.{file_extension}"
 
     async with aiofiles.open(out_file_path, 'wb') as out_file:
         while content := await upload_file.read(1024):
@@ -123,3 +119,4 @@ async def save_file(upload_file: UploadFile, base_directory: Optional[str] = "te
 
 async def remove_file(file_path: str):
     os.remove(file_path)
+

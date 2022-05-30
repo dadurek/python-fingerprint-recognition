@@ -1,7 +1,4 @@
-#FROM nginx:latest
 FROM python:3.10-slim
-
-WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
 	libglib2.0-0 \
@@ -10,9 +7,16 @@ RUN apt-get update && apt-get install -y \
     libgl1 \
 	libxrender-dev
 
-COPY ./requirements.txt /app
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+WORKDIR /code
 
-COPY . /app
+COPY ./requirements.txt /code/requirements.txt
 
-ENTRYPOINT ["/app/core/run.sh"]
+RUN pip install --trusted-host pypi.python.org -r /code/requirements.txt
+
+COPY ./src /code/src
+
+EXPOSE 8000
+
+WORKDIR /code/src
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
