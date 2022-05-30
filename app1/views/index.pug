@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Fingerprint comparator app
+  p Please provide two fingerprints to compare:
+  //- form with 2 image inputs
+  form(action='/compare' enctype="multipart/form-data" method='post')
+    input(type='file' name='image1')
+    input(type='file' name='image2')
+    input(type='submit')
