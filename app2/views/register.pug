@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 Register
+  p Provide your username and fingerprint to register
+  form(action='/register', enctype="multipart/form-data", method='post')
+    input(type='text', name='username', placeholder='Username')
+    input(type='file', name='fingerprint', placeholder='Fingerprint')
+    input(type='submit', value='Login')
