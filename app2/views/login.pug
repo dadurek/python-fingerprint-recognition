@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 Login
+  p Provide your credentials to login
+  if(error)
+    p Error
+  form(action='/login', enctype="multipart/form-data", method='post')
+    input(type='text', name='username', placeholder='Username')
+    input(type='file', name='fingerprint', placeholder='Fingerprint')
+    input(type='submit', value='Login')

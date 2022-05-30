@@ -9,6 +9,15 @@ services:
       NODE_ENV: production
       PORT: 3000
       BACKEND_URL: http://backend:8000
+  login-app:
+    build:
+      context: ./app2/
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      BACKEND_URL: http://backend:8000
   backend:
     build:
       context: ./server
