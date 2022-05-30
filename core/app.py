@@ -1,7 +1,6 @@
 import sys
 
 import cv2
-import matplotlib.pyplot as plt
 import numpy
 from skimage.morphology import skeletonize
 
@@ -46,10 +45,6 @@ def get_descriptors(img):
     # Normalize to 0 and 1 range
     img[img == 255] = 1
 
-    # Thinning
-    skeleton = skeletonize(img)
-    skeleton = numpy.array(skeleton, dtype=numpy.uint8)
-    skeleton = removedot(skeleton)
     # Harris corners
     harris_corners = cv2.cornerHarris(img, 3, 3, 0.04)
     harris_normalized = cv2.normalize(harris_corners, 0, 255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32FC1)
@@ -76,20 +71,9 @@ def main():
     img2 = cv2.imread(image_name, cv2.IMREAD_GRAYSCALE)
     kp2, des2 = get_descriptors(img2)
 
-    # Matching between descriptors
+    # # Matching between descriptors
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
     matches = sorted(bf.match(des1, des2), key=lambda match: match.distance)
-    # Plot keypoints
-    img4 = cv2.drawKeypoints(img1, kp1, outImage=None)
-    img5 = cv2.drawKeypoints(img2, kp2, outImage=None)
-    f, axarr = plt.subplots(1, 2)
-    axarr[0].imshow(img4)
-    axarr[1].imshow(img5)
-    plt.show()
-    # Plot matches
-    img3 = cv2.drawMatches(img1, kp1, img2, kp2, matches, flags=2, outImg=None)
-    plt.imshow(img3)
-    plt.show()
 
     # Calculate score
     score = 0;

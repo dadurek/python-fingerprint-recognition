@@ -1,7 +1,6 @@
 numpy
 scikit-image
 opencv-python
-matplotlib
 fastapi
 uvicorn
 python-multipart
