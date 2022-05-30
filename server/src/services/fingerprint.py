@@ -109,7 +109,7 @@ def compare_with_user(username: str, uploaded_filepath: str) -> bool:
 
 async def save_file(upload_file: UploadFile, base_directory: Optional[str] = "temp") -> str:
     file_extension = upload_file.filename.split('.')[-1]
-    base_dir = f"database/{base_directory}/"
+    base_dir = f"/database/{base_directory}/"
     Path(base_dir).mkdir(parents=True, exist_ok=True)
     out_file_path = f"{base_dir}/{uuid.uuid4()}.{file_extension}"
 
