@@ -2,7 +2,7 @@ from typing import Optional
 
 from fastapi import APIRouter, UploadFile
 
-from core.services.fingerprint import save_file, remove_file, compare_with_user, compare_fingerprints
+from services.fingerprint import save_file, remove_file, compare_with_user, compare_fingerprints
 
 router = APIRouter()
 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from .endpoints import router as endpoints_router
+from . import endpoints
 
 router = APIRouter()
-router.include_router(endpoints_router, prefix="/fingerprints", tags=["fingerprints"])
+router.include_router(endpoints.router, prefix="/fingerprints", tags=["fingerprints"])
