@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1 Compare result
+    div(class="row")
+        div(class="col")
+            img(src="data:image/png;base64," + image1, style="width: 100%")
+        div(class="col")
+            img(src="data:image/png;base64," + image2, style="width: 100%")
+    h2 Similarity score: #{score}
+
