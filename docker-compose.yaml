@@ -15,4 +15,4 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./server/database:/database
+      - ./server/database:/code/database
