@@ -10,7 +10,9 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-      BACKEND_URL: http://backend:3000
+      BACKEND_URL: http://backend:8000
   backend:
+    ports:
+      - "8000:8000"
     build:
       context: ./server

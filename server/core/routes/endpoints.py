@@ -8,7 +8,7 @@ router = APIRouter()
 
 
 # check if such fingerprint exist in databse (mongo)
-@router.post("/compare-with-user/")
+@router.post("/compare-with-user")
 async def compare_with_database(upload_file: UploadFile, username: str, compare_with_all: Optional[bool] = False): # TODO handle copate_with_all parameter
     uploaded_file_path: str = await save_file(upload_file=upload_file)
     result = compare_with_user(username, uploaded_file_path)
@@ -17,7 +17,7 @@ async def compare_with_database(upload_file: UploadFile, username: str, compare_
 
 
 # compare two fingerpirints
-@router.post("/compare/")
+@router.post("/compare")
 async def create_upload_files(upload_file_1: UploadFile, upload_file_2: UploadFile):
     uploaded_file_path_1: str = await save_file(upload_file=upload_file_1)
     uploaded_file_path_2: str = await save_file(upload_file=upload_file_2)
