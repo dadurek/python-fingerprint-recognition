@@ -1,8 +1,7 @@
 numpy
 scikit-image
 opencv-python
-fastapi
 uvicorn
+fastapi
 python-multipart
 aiofiles
-uvicorn
