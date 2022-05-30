@@ -8,10 +8,15 @@ const fs = require("fs");
 // image1 and image2 are image files
 async function compare(image1, image2) {
     const formData = new FormData();
-    formData.append('image1', fs.createReadStream(image1));
-    formData.append('image2', fs.createReadStream(image2));
+    formData.append('upload_file_1', fs.createReadStream(image1));
+    formData.append('upload_file_2', fs.createReadStream(image2));
 
-    const response = await axios.post(`${process.env.BACKEND_URL}/compare`, formData);
+    const response = await axios.post(`${process.env.BACKEND_URL}/fingerprints/compare`, formData, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'multipart/form-data'
+        }
+    });
 
     return response.data.score;
 }
